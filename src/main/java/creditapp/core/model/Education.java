@@ -1,11 +1,25 @@
 package creditapp.core.model;
 
 public enum Education {
-    PRIMARY,
+    PRIMARY(-100),
     MIDDLE,
     SECONDARY,
     POST_SECONDARY,
-    TERTIARY,
-    NONE
+    TERTIARY(100),
+    NONE(-200);
 
+    private final int scoringPoints;
+
+    Education() {
+        this.scoringPoints = 0;
+    }
+
+    Education(int scoringPoints) {
+        this.scoringPoints = scoringPoints;
+    }
+
+    public int getScoringPoints() {
+        return scoringPoints;
+    }
 }
+
