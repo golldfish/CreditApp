@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class CreditRatingCalculatorTest {
@@ -16,23 +16,26 @@ class CreditRatingCalculatorTest {
 
     @Test
     @DisplayName("Check credit rating when MORTGAGE_LOAN")
-    public void test5() {
+    public void test1() {
         //given
-        LoanApplication loanApplication = LoanApplicationTestFactory.create(9000, 3, Education.TERTIARY, MaritalStatus.SINGLE, LoanType.MORTGAGE, 20, (byte) 30);
+        SourceOfIncome sourceOfIncome1 = new SourceOfIncome(IncomeType.SELF_EMPLOYMENT, 4000);
+        SourceOfIncome sourceOfIncome2 = new SourceOfIncome(IncomeType.RETIREMENT, 1000);
+        LoanApplication loanApplication = LoanApplicationTestFactory.create(2, LoanType.MORTGAGE, 200000.0, (byte) 30, sourceOfIncome1, sourceOfIncome2);
         //when
         double creditRating = cut.calculate(loanApplication);
         //then
-        assertEquals(216000, creditRating);
+        assertEquals(180000, creditRating);
     }
+
 
     @Test
     @DisplayName("Check credit rating when PERSONAL_LOAN")
-    public void test6() {
+    public void test2() {
         //given
-        LoanApplication loanApplication = LoanApplicationTestFactory.create(9000, 3, Education.TERTIARY, MaritalStatus.SINGLE, LoanType.PERSONAL_LOAN, 20, (byte) 30);
-        //when
+        SourceOfIncome sourceOfIncome1 = new SourceOfIncome(IncomeType.SELF_EMPLOYMENT, 5000);
+        LoanApplication loanApplication = LoanApplicationTestFactory.create(2, LoanType.PERSONAL_LOAN, 200000.0, (byte) 30, sourceOfIncome1);        //when
         double creditRating = cut.calculate(loanApplication);
         //then
-        assertEquals(108000, creditRating);
+        assertEquals(90000, creditRating);
     }
 }

@@ -27,7 +27,6 @@ public class PersonTestFactory {
     public static Person create(int numberOfFamilyDependents, SourceOfIncome... sourceOfIncomes) {
         PersonalData personalData = new PersonalData("test", "test", "test", MaritalStatus.SINGLE, Education.MIDDLE, numberOfFamilyDependents);
         return new Person(personalData, null, new FinanceData(sourceOfIncomes));
-
     }
 
 }

@@ -13,7 +13,7 @@ public class CreditRatingCalculator {
     private static final Logger log = LoggerFactory.getLogger(CreditRatingCalculator.class);
 
     public double calculate(LoanApplication loanApplication) {
-        double incomePerFamilyMember = loanApplication.getPerson().getIncomePerFamilyMember() / loanApplication.getPerson().getPersonalData().getNumberOfFamilyDependents();
+        double incomePerFamilyMember = loanApplication.getPerson().getIncomePerFamilyMember();
         double creditRate = incomePerFamilyMember * 12 * loanApplication.getPurposeOfLoan().getPeriod();
         if (loanApplication.getPurposeOfLoan().getLoanType().name().equals("MORTGAGE")) {
             creditRate *= MORTGAGE_LOAN_RATE;
